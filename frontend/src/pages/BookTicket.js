@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Ticket, User, CreditCard, CheckCircle, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Ticket, User, CreditCard, CheckCircle, ArrowLeft, ArrowRight, MapPin, Users as UsersIcon, DollarSign } from 'lucide-react';
 import { toast } from 'react-toastify';
 import RouteSelector from '../components/RouteSelector';
 
@@ -51,19 +51,21 @@ const BookTicket = () => {
   const stepIcon = [Ticket, User, CreditCard, CheckCircle];
 
   return (
-    <div className="container py-4" style={{ maxWidth: 720 }}>
+    <div className="container-fluid" style={{ maxWidth: 1400 }}>
+      {/* Header */}
       <div className="d-flex align-items-center gap-3 mb-4">
-        <button className="btn btn-sm" onClick={() => navigate('/dashboard')}
-          style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)', color: 'var(--text)', borderRadius: 10 }}>
+        <button className="btn btn-sm" onClick={() => navigate('/user-dashboard')}
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#475569', borderRadius: 8 }}>
           <ArrowLeft size={16} />
         </button>
         <div>
-          <h4 style={{ color: 'var(--text)', fontWeight: 800, margin: 0 }}>Book Ticket</h4>
-          <p style={{ color: 'var(--text3)', margin: 0, fontSize: '0.85rem' }}>Quick one-way ticket booking</p>
+          <h4 style={{ color: '#0f172a', fontWeight: 700, margin: 0 }}>Book Ticket</h4>
+          <p style={{ color: '#64748b', margin: 0, fontSize: '0.875rem' }}>Quick one-way ticket booking</p>
         </div>
       </div>
 
-      <div className="d-flex align-items-center mb-4 gap-1">
+      {/* Progress Stepper */}
+      <div className="d-flex align-items-center mb-4 gap-1" style={{ maxWidth: 800 }}>
         {STEPS.map((label, i) => {
           const Icon = stepIcon[i];
           const done = i < step;
@@ -72,184 +74,297 @@ const BookTicket = () => {
             <React.Fragment key={i}>
               <div className="d-flex flex-column align-items-center" style={{ flex: 1 }}>
                 <div style={{
-                  width: 36, height: 36, borderRadius: '50%',
-                  background: done ? 'var(--success)' : active ? 'var(--primary)' : 'rgba(255,255,255,0.07)',
-                  border: active ? '2px solid var(--primary-light)' : '2px solid transparent',
+                  width: 40, height: 40, borderRadius: '50%',
+                  background: done ? '#10b981' : active ? '#0c4a6e' : '#f8fafc',
+                  border: active ? '2px solid #22d3ee' : '1px solid #e2e8f0',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s',
                 }}>
-                  <Icon size={16} color="white" />
+                  <Icon size={18} color={done || active ? 'white' : '#94a3b8'} />
                 </div>
-                <span style={{ fontSize: '0.65rem', color: active ? 'var(--primary-light)' : done ? 'var(--success)' : 'var(--text3)', marginTop: 4, textAlign: 'center' }}>
+                <span style={{ fontSize: '0.75rem', color: active ? '#0c4a6e' : done ? '#10b981' : '#64748b', marginTop: 6, textAlign: 'center', fontWeight: 600 }}>
                   {label}
                 </span>
               </div>
               {i < STEPS.length - 1 && (
-                <div style={{ flex: 1, height: 2, background: i < step ? 'var(--success)' : 'rgba(255,255,255,0.1)', borderRadius: 2, marginBottom: 20 }} />
+                <div style={{ flex: 1, height: 2, background: i < step ? '#10b981' : '#e2e8f0', borderRadius: 2, marginBottom: 32 }} />
               )}
             </React.Fragment>
           );
         })}
       </div>
 
-      <div className="glass-card p-4">
-        {step === 0 && (
-          <div>
-            <h6 style={{ color: 'var(--text)', fontWeight: 700, marginBottom: '1rem' }}>Choose Your Route</h6>
-            <RouteSelector selectedRoute={selectedRoute} onRouteSelect={setSelectedRoute} />
-            {selectedRoute && (
-              <div className="mt-3 p-3 rounded" style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)' }}>
-                <div style={{ color: 'var(--success)', fontWeight: 700, fontSize: '0.9rem' }}>
-                  Selected: {selectedRoute.source} to {selectedRoute.destination}
+      {/* Two Column Layout */}
+      <div className="row g-4">
+        {/* Left Column - Main Content */}
+        <div className="col-lg-8">
+          <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 12, padding: '2rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+            {step === 0 && (
+              <div>
+                <h5 style={{ color: '#0f172a', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Choose Your Route</h5>
+                <RouteSelector selectedRoute={selectedRoute} onRouteSelect={setSelectedRoute} />
+              </div>
+            )}
+
+            {step === 1 && (
+              <div>
+                <div className="d-flex align-items-center justify-content-between mb-4">
+                  <h5 style={{ color: '#0f172a', fontWeight: 700, margin: 0, fontSize: '1.25rem' }}>Passenger Details</h5>
+                  {passengers.length < 5 && (
+                    <button className="btn btn-sm" onClick={addPassenger}
+                      style={{ background: '#0c4a6e', border: 'none', color: 'white', borderRadius: 8, fontSize: '0.875rem', padding: '0.5rem 1rem', fontWeight: 600 }}>
+                      + Add Passenger
+                    </button>
+                  )}
                 </div>
-                <div style={{ color: 'var(--text3)', fontSize: '0.8rem', marginTop: 2 }}>
-                  Fare per person: Rs.{selectedRoute.fare} | {selectedRoute.distance} km
+                {passengers.map((p, i) => (
+                  <div key={i} className="mb-3 p-3 rounded" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                      <span style={{ color: '#475569', fontSize: '0.875rem', fontWeight: 700 }}>Passenger {i + 1}</span>
+                      {passengers.length > 1 && (
+                        <button className="btn btn-sm" onClick={() => removePassenger(i)}
+                          style={{ background: '#fee2e2', border: '1px solid #fecaca', color: '#dc2626', borderRadius: 6, fontSize: '0.75rem', padding: '0.25rem 0.75rem', fontWeight: 600 }}>
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                    <div className="row g-3">
+                      <div className="col-md-5">
+                        <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, marginBottom: '0.25rem' }}>Full Name *</label>
+                        <input className="form-control" placeholder="Enter full name" value={p.name}
+                          onChange={e => updatePassenger(i, 'name', e.target.value)}
+                          style={{ fontSize: '0.875rem' }} />
+                      </div>
+                      <div className="col-md-3">
+                        <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, marginBottom: '0.25rem' }}>Age *</label>
+                        <input className="form-control" type="number" placeholder="Age" value={p.age} min={1} max={120}
+                          onChange={e => updatePassenger(i, 'age', e.target.value)}
+                          style={{ fontSize: '0.875rem' }} />
+                      </div>
+                      <div className="col-md-4">
+                        <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, marginBottom: '0.25rem' }}>Gender</label>
+                        <select className="form-select" value={p.gender} onChange={e => updatePassenger(i, 'gender', e.target.value)}
+                          style={{ fontSize: '0.875rem' }}>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {step === 2 && (
+              <div>
+                <h5 style={{ color: '#0f172a', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Payment Method</h5>
+                <div className="row g-3 mb-4">
+                  {[
+                    { id: 'upi', label: 'UPI', icon: '📱' },
+                    { id: 'card', label: 'Card', icon: '💳' },
+                    { id: 'netbanking', label: 'Net Banking', icon: '🏦' },
+                    { id: 'wallet', label: 'Wallet', icon: '👛' }
+                  ].map(m => (
+                    <div className="col-6 col-md-3" key={m.id}>
+                      <button onClick={() => setPaymentMethod(m.id)}
+                        style={{
+                          width: '100%', padding: '1.25rem', borderRadius: 12, fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer',
+                          background: paymentMethod === m.id ? '#0c4a6e' : '#f8fafc',
+                          border: paymentMethod === m.id ? '2px solid #22d3ee' : '1px solid #e2e8f0',
+                          color: paymentMethod === m.id ? 'white' : '#475569',
+                          transition: 'all 0.2s',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: '0.5rem'
+                        }}>
+                        <span style={{ fontSize: '1.75rem' }}>{m.icon}</span>
+                        {m.label}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <button className="btn w-100" onClick={handlePayment}
+                  style={{
+                    padding: '1rem',
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    background: '#10b981',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 8
+                  }}>
+                  Pay Rs.{totalFare} and Confirm Booking
+                </button>
+              </div>
+            )}
+
+            {step === 3 && booked && (
+              <div className="text-center py-4">
+                <div style={{ width: 80, height: 80, borderRadius: '50%', background: '#d1fae5', border: '3px solid #10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                  <CheckCircle size={40} style={{ color: '#10b981' }} />
+                </div>
+                <h4 style={{ color: '#0f172a', fontWeight: 700, marginBottom: '0.5rem' }}>Booking Confirmed!</h4>
+                <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '2rem' }}>Your ticket has been booked successfully.</p>
+
+                <div className="p-4 rounded mb-4" style={{ background: '#f8fafc', border: '1px solid #e2e8f0', maxWidth: 400, margin: '0 auto' }}>
+                  <div style={{ color: '#64748b', fontSize: '0.75rem', marginBottom: '0.5rem', fontWeight: 600 }}>Booking Reference</div>
+                  <div style={{ color: '#0c4a6e', fontWeight: 800, fontSize: '1.75rem', letterSpacing: 2, marginBottom: '1rem' }}>{bookingRef}</div>
+                  <hr style={{ borderColor: '#e2e8f0', margin: '1rem 0' }} />
+                  <div className="text-start">
+                    <div className="d-flex justify-content-between mb-2">
+                      <span style={{ color: '#64748b', fontSize: '0.875rem' }}>Route</span>
+                      <span style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem' }}>{selectedRoute?.source} → {selectedRoute?.destination}</span>
+                    </div>
+                    <div className="d-flex justify-content-between mb-2">
+                      <span style={{ color: '#64748b', fontSize: '0.875rem' }}>Passengers</span>
+                      <span style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem' }}>{passengers.length}</span>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <span style={{ color: '#64748b', fontSize: '0.875rem' }}>Payment</span>
+                      <span style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem' }}>{paymentMethod.toUpperCase()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="d-flex gap-3 justify-content-center">
+                  <button className="btn" onClick={() => navigate('/user-dashboard')}
+                    style={{ padding: '0.75rem 1.5rem', fontWeight: 700, background: '#0c4a6e', color: 'white', border: 'none', borderRadius: 8 }}>
+                    Go to Dashboard
+                  </button>
+                  <button className="btn" onClick={() => { setStep(0); setSelectedRoute(null); setPassengers([{ name: '', age: '', gender: 'male' }]); setBooked(false); }}
+                    style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#475569', borderRadius: 8, padding: '0.75rem 1.5rem', fontWeight: 600 }}>
+                    Book Another
+                  </button>
                 </div>
               </div>
             )}
           </div>
-        )}
 
-        {step === 1 && (
-          <div>
-            <div className="d-flex align-items-center justify-content-between mb-3">
-              <h6 style={{ color: 'var(--text)', fontWeight: 700, margin: 0 }}>Passenger Details</h6>
-              {passengers.length < 5 && (
-                <button className="btn btn-sm" onClick={addPassenger}
-                  style={{ background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)', color: 'var(--primary-light)', borderRadius: 8, fontSize: '0.8rem' }}>
-                  + Add Passenger
+          {/* Navigation Buttons */}
+          {step < 3 && (
+            <div className="d-flex justify-content-between mt-4">
+              <button className="btn" onClick={() => step === 0 ? navigate('/user-dashboard') : setStep(step - 1)}
+                style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#475569', borderRadius: 8, padding: '0.75rem 1.25rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <ArrowLeft size={16} /> {step === 0 ? 'Cancel' : 'Back'}
+              </button>
+              {step < 2 && (
+                <button className="btn" onClick={handleNext} disabled={!canNext()}
+                  style={{
+                    padding: '0.75rem 1.5rem',
+                    fontWeight: 700,
+                    opacity: canNext() ? 1 : 0.5,
+                    background: '#0c4a6e',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 8,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}>
+                  Next <ArrowRight size={16} />
                 </button>
               )}
             </div>
-            {passengers.map((p, i) => (
-              <div key={i} className="mb-3 p-3 rounded" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <div className="d-flex justify-content-between align-items-center mb-2">
-                  <span style={{ color: 'var(--text3)', fontSize: '0.8rem', fontWeight: 600 }}>Passenger {i + 1}</span>
-                  {passengers.length > 1 && (
-                    <button className="btn btn-sm" onClick={() => removePassenger(i)}
-                      style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: '#f87171', borderRadius: 6, fontSize: '0.75rem', padding: '2px 8px' }}>
-                      Remove
-                    </button>
-                  )}
-                </div>
-                <div className="row g-2">
-                  <div className="col-md-5">
-                    <input className="form-control" placeholder="Full Name *" value={p.name}
-                      onChange={e => updatePassenger(i, 'name', e.target.value)} />
-                  </div>
-                  <div className="col-md-3">
-                    <input className="form-control" type="number" placeholder="Age *" value={p.age} min={1} max={120}
-                      onChange={e => updatePassenger(i, 'age', e.target.value)} />
-                  </div>
-                  <div className="col-md-4">
-                    <select className="form-select" value={p.gender} onChange={e => updatePassenger(i, 'gender', e.target.value)}>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <div className="p-3 rounded mt-2" style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)' }}>
-              <div className="d-flex justify-content-between">
-                <span style={{ color: 'var(--text3)' }}>Route</span>
-                <span style={{ color: 'var(--text)', fontWeight: 600 }}>{selectedRoute?.source} to {selectedRoute?.destination}</span>
-              </div>
-              <div className="d-flex justify-content-between mt-1">
-                <span style={{ color: 'var(--text3)' }}>Passengers</span>
-                <span style={{ color: 'var(--text)', fontWeight: 600 }}>{passengers.length}</span>
-              </div>
-              <div className="d-flex justify-content-between mt-1">
-                <span style={{ color: 'var(--text3)' }}>Total Fare</span>
-                <span style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.05rem' }}>Rs.{totalFare}</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {step === 2 && (
-          <div>
-            <h6 style={{ color: 'var(--text)', fontWeight: 700, marginBottom: '1rem' }}>Payment</h6>
-            <div className="mb-3 p-3 rounded" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="d-flex justify-content-between mb-1">
-                <span style={{ color: 'var(--text3)' }}>Route</span>
-                <span style={{ color: 'var(--text)', fontWeight: 600 }}>{selectedRoute?.source} to {selectedRoute?.destination}</span>
-              </div>
-              <div className="d-flex justify-content-between mb-1">
-                <span style={{ color: 'var(--text3)' }}>Passengers</span>
-                <span style={{ color: 'var(--text)', fontWeight: 600 }}>{passengers.length} x Rs.{selectedRoute?.fare}</span>
-              </div>
-              <hr style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
-              <div className="d-flex justify-content-between">
-                <span style={{ color: 'var(--text)', fontWeight: 700 }}>Total</span>
-                <span style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>Rs.{totalFare}</span>
-              </div>
-            </div>
-            <label className="form-label" style={{ color: 'var(--text3)' }}>Payment Method</label>
-            <div className="d-flex gap-2 flex-wrap mb-4">
-              {['upi', 'card', 'netbanking', 'wallet'].map(m => (
-                <button key={m} onClick={() => setPaymentMethod(m)}
-                  style={{
-                    padding: '8px 18px', borderRadius: 10, fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer',
-                    background: paymentMethod === m ? 'var(--primary)' : 'rgba(255,255,255,0.05)',
-                    border: paymentMethod === m ? '2px solid var(--primary-light)' : '1px solid rgba(255,255,255,0.12)',
-                    color: 'var(--text)', transition: 'all 0.2s',
-                  }}>
-                  {m.toUpperCase()}
-                </button>
-              ))}
-            </div>
-            <button className="btn-3d w-100" onClick={handlePayment}
-              style={{ padding: '12px', fontSize: '1rem', fontWeight: 700 }}>
-              Pay Rs.{totalFare} and Book
-            </button>
-          </div>
-        )}
-
-        {step === 3 && booked && (
-          <div className="text-center py-3">
-            <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', border: '2px solid var(--success)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.2rem' }}>
-              <CheckCircle size={36} style={{ color: 'var(--success)' }} />
-            </div>
-            <h5 style={{ color: 'var(--text)', fontWeight: 800 }}>Ticket Booked!</h5>
-            <p style={{ color: 'var(--text3)', fontSize: '0.9rem' }}>Your booking is confirmed.</p>
-            <div className="p-3 rounded mb-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', display: 'inline-block', minWidth: 280 }}>
-              <div style={{ color: 'var(--text3)', fontSize: '0.8rem' }}>Booking Reference</div>
-              <div style={{ color: 'var(--primary-light)', fontWeight: 800, fontSize: '1.3rem', letterSpacing: 2 }}>{bookingRef}</div>
-              <hr style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
-              <div style={{ color: 'var(--text)', fontWeight: 600 }}>{selectedRoute?.source} to {selectedRoute?.destination}</div>
-              <div style={{ color: 'var(--text3)', fontSize: '0.82rem', marginTop: 4 }}>
-                {passengers.length} passenger{passengers.length > 1 ? 's' : ''} | Rs.{totalFare} paid via {paymentMethod.toUpperCase()}
-              </div>
-            </div>
-            <div className="d-flex gap-2 justify-content-center mt-2">
-              <button className="btn-3d" onClick={() => navigate('/dashboard')}
-                style={{ padding: '10px 24px', fontWeight: 700 }}>
-                Go to Dashboard
-              </button>
-              <button className="btn" onClick={() => { setStep(0); setSelectedRoute(null); setPassengers([{ name: '', age: '', gender: 'male' }]); setBooked(false); }}
-                style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)', color: 'var(--text)', borderRadius: 10, padding: '10px 24px', fontWeight: 600 }}>
-                Book Another
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {step < 3 && (
-        <div className="d-flex justify-content-between mt-3">
-          <button className="btn" onClick={() => step === 0 ? navigate('/dashboard') : setStep(step - 1)}
-            style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)', color: 'var(--text)', borderRadius: 10, padding: '10px 20px', fontWeight: 600 }}>
-            <ArrowLeft size={15} /> {step === 0 ? 'Cancel' : 'Back'}
-          </button>
-          {step < 2 && (
-            <button className="btn-3d" onClick={handleNext} disabled={!canNext()}
-              style={{ padding: '10px 24px', fontWeight: 700, opacity: canNext() ? 1 : 0.5 }}>
-              Next <ArrowRight size={15} />
-            </button>
           )}
         </div>
-      )}
+
+        {/* Right Column - Summary Sidebar */}
+        <div className="col-lg-4">
+          <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 12, padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', position: 'sticky', top: 90 }}>
+            <h6 style={{ color: '#0f172a', fontWeight: 700, marginBottom: '1.25rem', fontSize: '1rem' }}>Booking Summary</h6>
+
+            {selectedRoute ? (
+              <>
+                {/* Route Info */}
+                <div className="mb-4 p-3 rounded" style={{ background: '#ecfeff', border: '1px solid #22d3ee' }}>
+                  <div className="d-flex align-items-center gap-2 mb-2">
+                    <MapPin size={16} color="#0c4a6e" />
+                    <span style={{ color: '#0c4a6e', fontWeight: 700, fontSize: '0.875rem' }}>Route</span>
+                  </div>
+                  <div style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+                    {selectedRoute.source}
+                  </div>
+                  <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginBottom: '0.25rem' }}>↓</div>
+                  <div style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem' }}>
+                    {selectedRoute.destination}
+                  </div>
+                  <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+                    {selectedRoute.distance} km • {selectedRoute.duration}
+                  </div>
+                </div>
+
+                {/* Passengers */}
+                <div className="mb-4">
+                  <div className="d-flex align-items-center justify-content-between mb-2">
+                    <div className="d-flex align-items-center gap-2">
+                      <UsersIcon size={16} color="#64748b" />
+                      <span style={{ color: '#64748b', fontWeight: 600, fontSize: '0.875rem' }}>Passengers</span>
+                    </div>
+                    <span style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.875rem' }}>{passengers.length}</span>
+                  </div>
+                  {step >= 1 && passengers.some(p => p.name) && (
+                    <div className="mt-2">
+                      {passengers.filter(p => p.name).map((p, i) => (
+                        <div key={i} style={{
+                          padding: '0.5rem 0.75rem',
+                          background: '#f8fafc',
+                          border: '1px solid #e2e8f0',
+                          borderRadius: 6,
+                          marginBottom: '0.5rem',
+                          fontSize: '0.8125rem',
+                          color: '#475569'
+                        }}>
+                          <div className="d-flex justify-content-between">
+                            <span>{p.name}</span>
+                            <span>{p.age} yrs, {p.gender}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Fare Breakdown */}
+                <div className="mb-3">
+                  <div className="d-flex align-items-center gap-2 mb-3">
+                    <DollarSign size={16} color="#64748b" />
+                    <span style={{ color: '#64748b', fontWeight: 600, fontSize: '0.875rem' }}>Fare Breakdown</span>
+                  </div>
+                  <div className="d-flex justify-content-between mb-2">
+                    <span style={{ color: '#64748b', fontSize: '0.875rem' }}>Base Fare (per person)</span>
+                    <span style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem' }}>Rs.{selectedRoute.fare}</span>
+                  </div>
+                  <div className="d-flex justify-content-between mb-2">
+                    <span style={{ color: '#64748b', fontSize: '0.875rem' }}>Number of Passengers</span>
+                    <span style={{ color: '#0f172a', fontWeight: 600, fontSize: '0.875rem' }}>× {passengers.length}</span>
+                  </div>
+                  <hr style={{ borderColor: '#e2e8f0', margin: '0.75rem 0' }} />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <span style={{ color: '#0f172a', fontWeight: 700, fontSize: '1rem' }}>Total Amount</span>
+                    <span style={{ color: '#10b981', fontWeight: 800, fontSize: '1.5rem' }}>Rs.{totalFare}</span>
+                  </div>
+                </div>
+
+                {step === 2 && (
+                  <div className="p-3 rounded" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
+                    <div style={{ color: '#15803d', fontSize: '0.8125rem', fontWeight: 600 }}>
+                      Payment Method: {paymentMethod.toUpperCase()}
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center py-5">
+                <Ticket size={48} color="#cbd5e1" style={{ marginBottom: '1rem' }} />
+                <p style={{ color: '#94a3b8', fontSize: '0.875rem', margin: 0 }}>
+                  Select a route to view booking summary
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

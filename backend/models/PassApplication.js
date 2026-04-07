@@ -113,8 +113,9 @@ passApplicationSchema.pre('save', function(next) {
   next();
 });
 
+// Indexes (applicationId and passNumber already indexed via unique: true)
 passApplicationSchema.index({ userId: 1, status: 1 });
-passApplicationSchema.index({ applicationId: 1 });
-passApplicationSchema.index({ passNumber: 1 });
+passApplicationSchema.index({ createdAt: -1 });
+passApplicationSchema.index({ status: 1, createdAt: -1 });
 
 module.exports = mongoose.model('PassApplication', passApplicationSchema);

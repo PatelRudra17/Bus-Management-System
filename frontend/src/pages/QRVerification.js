@@ -17,12 +17,13 @@ const QRVerification = () => {
   const animationRef = useRef(null);
 
   useEffect(() => {
+    const video = videoRef.current;
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      if (videoRef.current?.srcObject) {
-        const tracks = videoRef.current.srcObject.getTracks();
+      if (video?.srcObject) {
+        const tracks = video.srcObject.getTracks();
         tracks.forEach(track => track.stop());
       }
     };

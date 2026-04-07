@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8FAFC">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Loading -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- No Card State -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/noCardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="48dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎴"
+                    android:textSize="80sp"
+                    android:layout_marginBottom="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Smart Card Found"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#0F172A"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You haven't applied for a smart card yet.\nApply now to enjoy cashless travel!"
+                    android:textSize="14sp"
+                    android:textColor="#64748B"
+                    android:gravity="center"
+                    android:layout_marginBottom="32dp" />
+
+                <Button
+                    android:id="@+id/btnApplyCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apply for Smart Card"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@android:color/white"
+                    style="@style/Widget.MaterialComponents.Button" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card Display -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Smart Card UI -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="#1E40AF"
+                        android:layout_marginBottom="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <!-- Header Row -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="20dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="🚌 Smart Bus Card"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/white" />
+
+                                    <TextView
+                                        android:id="@+id/tvExpiryDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Valid until: Dec 31, 2024"
+                                        android:textSize="11sp"
+                                        android:textColor="#BFDBFE"
+                                        android:layout_marginTop="4dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tvStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Active"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@android:color/holo_green_light"
+                                    android:background="#10B981"
+                                    android:padding="6dp"
+                                    android:paddingHorizontal="12dp" />
+                            </LinearLayout>
+
+                            <!-- Card Number -->
+                            <TextView
+                                android:id="@+id/tvCardNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1234 5678 9012 3456"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/white"
+                                android:letterSpacing="0.1"
+                                android:layout_marginBottom="20dp" />
+
+                            <!-- Bottom Row -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Balance"
+                                        android:textSize="11sp"
+                                        android:textColor="#BFDBFE" />
+
+                                    <TextView
+                                        android:id="@+id/tvBalance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="₹500.00"
+                                        android:textSize="24sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/white" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="end">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Trips"
+                                        android:textSize="11sp"
+                                        android:textColor="#BFDBFE" />
+
+                                    <TextView
+                                        android:id="@+id/tvTripCount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="42"
+                                        android:textSize="24sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/white" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <!-- Photo (hidden for now) -->
+                            <ImageView
+                                android:id="@+id/ivCardPhoto"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:visibility="gone" />
+
+                            <!-- Concession Badge -->
+                            <TextView
+                                android:id="@+id/tvConcession"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🎫 STUDENT - 50% OFF"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/white"
+                                android:background="#10B981"
+                                android:padding="6dp"
+                                android:paddingHorizontal="12dp"
+                                android:layout_marginTop="12dp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Recharge Button -->
+                    <Button
+                        android:id="@+id/btnRecharge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="💳 Recharge Card"
+                        android:textSize="14sp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.Button" />
+
+                    <!-- Recharge Section -->
+                    <LinearLayout
+                        android:id="@+id/rechargeSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/edit_text_background"
+                        android:padding="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recharge Amount"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#0F172A"
+                            android:layout_marginBottom="8dp" />
+
+                        <EditText
+                            android:id="@+id/etRechargeAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter amount (₹)"
+                            android:inputType="numberDecimal"
+                            android:textSize="14sp"
+                            android:padding="12dp"
+                            android:background="@drawable/edit_text_background"
+                            android:layout_marginBottom="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btnSubmitRecharge"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Recharge"
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:textColor="@android:color/white"
+                                android:layout_marginEnd="8dp"
+                                style="@style/Widget.MaterialComponents.Button" />
+
+                            <Button
+                                android:id="@+id/btnCancelRecharge"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Cancel"
+                                android:backgroundTint="#F8FAFC"
+                                android:textColor="#475569"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Tabs -->
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        app:tabMode="fixed"
+                        app:tabGravity="fill"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overview" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="History" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Transactions" />
+                    </com.google.android.material.tabs.TabLayout>
+
+                    <!-- Tab Content -->
+                    <!-- Overview Tab -->
+                    <LinearLayout
+                        android:id="@+id/tabOverview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Card Overview"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#0F172A"
+                            android:padding="16dp" />
+                    </LinearLayout>
+
+                    <!-- History Tab -->
+                    <LinearLayout
+                        android:id="@+id/tabHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/historyContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+                    </LinearLayout>
+
+                    <!-- Transactions Tab -->
+                    <LinearLayout
+                        android:id="@+id/tabTransactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Transaction History"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#0F172A"
+                            android:padding="16dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+</LinearLayout>

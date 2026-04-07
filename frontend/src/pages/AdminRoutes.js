@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { routeAPI } from '../utils/api';
 import { toast } from 'react-toastify';
-import { MapPin, Plus, Edit, Trash2, RefreshCw, X } from 'lucide-react';
+import { MapPin, Plus, Edit, Trash2, RefreshCw } from 'lucide-react';
 
 const EMPTY = { routeNumber: '', source: '', destination: '', distance: '', fare: '', busType: 'standard', totalSeats: 40 };
 
@@ -50,9 +50,9 @@ const AdminRoutes = () => {
     catch { toast.error('Error deleting route'); }
   };
 
-  const busTypeBadge = { standard: { bg: 'rgba(99,102,241,0.2)', color: '#a5b4fc', border: 'rgba(99,102,241,0.4)' },
-    ac: { bg: 'rgba(6,182,212,0.2)', color: '#22d3ee', border: 'rgba(6,182,212,0.4)' },
-    luxury: { bg: 'rgba(245,158,11,0.2)', color: '#fbbf24', border: 'rgba(245,158,11,0.4)' } };
+  const busTypeBadge = { standard: { bg: 'var(--primary-50)', color: 'var(--primary)', border: 'var(--primary-100)' },
+    ac: { bg: 'var(--info-50)', color: 'var(--info)', border: 'var(--info-100)' },
+    luxury: { bg: 'var(--warning-50)', color: 'var(--warning)', border: 'var(--warning-100)' } };
 
   return (
     <div className="container-fluid">
@@ -94,17 +94,17 @@ const AdminRoutes = () => {
                   <tr key={r._id}>
                     <td><span style={{ fontWeight: 700, color: 'var(--primary-light)' }}>{r.routeNumber}</span></td>
                     <td>
-                      <div style={{ color: 'var(--text)', fontWeight: 500 }}>{r.source}</div>
-                      <div style={{ color: 'var(--text3)', fontSize: '0.8rem' }}>→ {r.destination}</div>
+                      <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{r.source}</div>
+                      <div style={{ color: 'var(--text-tertiary)', fontSize: '0.8rem' }}>→ {r.destination}</div>
                     </td>
-                    <td style={{ color: 'var(--text2)' }}>{r.distance} km</td>
+                    <td style={{ color: 'var(--text-secondary)' }}>{r.distance} km</td>
                     <td style={{ color: 'var(--success)', fontWeight: 700 }}>₹{r.fare}</td>
                     <td>
                       <span className="badge" style={{ background: bt.bg, color: bt.color, border: `1px solid ${bt.border}` }}>
                         {r.busType.toUpperCase()}
                       </span>
                     </td>
-                    <td style={{ color: 'var(--text2)' }}>{r.totalSeats}</td>
+                    <td style={{ color: 'var(--text-secondary)' }}>{r.totalSeats}</td>
                     <td>
                       <span className={`badge ${r.isActive ? 'bg-success' : 'bg-secondary'}`}>
                         {r.isActive ? 'Active' : 'Inactive'}
@@ -129,7 +129,7 @@ const AdminRoutes = () => {
       )}
 
       {showModal && (
-        <div className="modal show d-block" style={{ background: 'rgba(0,0,0,0.75)' }}>
+        <div className="modal show d-block" style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)' }}>
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">

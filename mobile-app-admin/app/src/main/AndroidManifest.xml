@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:label="@string/app_name"
+        android:roundIcon="@android:drawable/ic_menu_manage"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BusPassAdmin"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.BusPassAdmin.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.Auth"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+        <activity
+            android:name=".activities.ApplicationsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+        <activity
+            android:name=".activities.ApplicationDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+        <activity
+            android:name=".activities.UsersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+        <activity
+            android:name=".activities.RoutesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+        <activity
+            android:name=".activities.PaymentsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+        <activity
+            android:name=".activities.QRScanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusPassAdmin.NoActionBar" />
+
+    </application>
+</manifest>

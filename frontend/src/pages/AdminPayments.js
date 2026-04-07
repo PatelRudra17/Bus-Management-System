@@ -10,7 +10,10 @@ const AdminPayments = () => {
   const [pagination, setPagination] = useState({});
   const [statusFilter, setStatusFilter] = useState('');
 
-  useEffect(() => { fetchData(); }, [statusFilter]);
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusFilter]);
 
   const fetchData = async (page = 1) => {
     setLoading(true);
@@ -40,10 +43,10 @@ const AdminPayments = () => {
   const refundedStats = stats?.stats?.find(s => s._id === 'refunded');
 
   const statusStyle = {
-    success:  { bg: 'rgba(16,185,129,0.15)',  color: '#34d399', border: 'rgba(16,185,129,0.3)' },
-    pending:  { bg: 'rgba(245,158,11,0.15)',  color: '#fbbf24', border: 'rgba(245,158,11,0.3)' },
-    failed:   { bg: 'rgba(239,68,68,0.15)',   color: '#f87171', border: 'rgba(239,68,68,0.3)' },
-    refunded: { bg: 'rgba(6,182,212,0.15)',   color: '#22d3ee', border: 'rgba(6,182,212,0.3)' },
+    success:  { bg: 'var(--success-50)',  color: 'var(--success)', border: 'var(--success-100)' },
+    pending:  { bg: 'var(--warning-50)',  color: 'var(--warning)', border: 'var(--warning-100)' },
+    failed:   { bg: 'var(--danger-50)',   color: 'var(--danger)', border: 'var(--danger-100)' },
+    refunded: { bg: 'var(--info-50)',     color: 'var(--info)', border: 'var(--info-100)' },
   };
 
   return (
@@ -109,7 +112,7 @@ const AdminPayments = () => {
 
       {/* Filter */}
       <div className="p-3 mb-4 animate-fade-in-up animate-delay-2"
-        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16 }}>
+        style={{ background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: 12 }}>
         <div className="row g-3">
           <div className="col-md-3">
             <select className="form-select" value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
@@ -143,7 +146,7 @@ const AdminPayments = () => {
               </thead>
               <tbody>
                 {payments.length === 0 ? (
-                  <tr><td colSpan={8} className="text-center py-4" style={{ color: 'var(--text3)' }}>No payments found</td></tr>
+                  <tr><td colSpan={8} className="text-center py-4" style={{ color: 'var(--text-tertiary)' }}>No payments found</td></tr>
                 ) : payments.map(p => {
                   const s = statusStyle[p.paymentStatus] || statusStyle.pending;
                   return (
@@ -152,15 +155,15 @@ const AdminPayments = () => {
                         {p.transactionId?.slice(0, 16)}...
                       </td>
                       <td>
-                        <div style={{ fontWeight: 600, color: 'var(--text)' }}>{p.userId?.name}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text3)' }}>{p.userId?.email}</div>
+                        <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{p.userId?.name}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>{p.userId?.email}</div>
                       </td>
-                      <td style={{ color: 'var(--text2)', fontSize: '0.85rem' }}>
-                        {p.applicationId?.applicationId || <span style={{ color: 'var(--text3)' }}>—</span>}
+                      <td style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                        {p.applicationId?.applicationId || <span style={{ color: 'var(--text-tertiary)' }}>—</span>}
                       </td>
                       <td style={{ color: 'var(--success)', fontWeight: 700 }}>₹{p.amount}</td>
                       <td>
-                        <span className="badge" style={{ background: 'rgba(255,255,255,0.08)', color: 'var(--text2)', border: '1px solid rgba(255,255,255,0.12)', textTransform: 'uppercase' }}>
+                        <span className="badge" style={{ background: 'var(--bg-tertiary)', color: 'var(--text-secondary)', border: '1px solid var(--border)', textTransform: 'uppercase' }}>
                           {p.paymentMethod}
                         </span>
                       </td>
@@ -169,7 +172,7 @@ const AdminPayments = () => {
                           {p.paymentStatus}
                         </span>
                       </td>
-                      <td style={{ color: 'var(--text3)', fontSize: '0.82rem' }}>
+                      <td style={{ color: 'var(--text-tertiary)', fontSize: '0.82rem' }}>
                         {new Date(p.createdAt).toLocaleDateString()}
                       </td>
                       <td>
@@ -193,8 +196,8 @@ const AdminPayments = () => {
                 <button key={i} onClick={() => fetchData(i + 1)}
                   style={{
                     width: 36, height: 36, borderRadius: 8, border: 'none', cursor: 'pointer',
-                    background: pagination.page === i + 1 ? 'var(--primary)' : 'rgba(255,255,255,0.07)',
-                    color: 'var(--text)', fontWeight: 600, fontSize: '0.85rem'
+                    background: pagination.page === i + 1 ? 'var(--primary)' : 'var(--bg-secondary)',
+                    color: pagination.page === i + 1 ? 'white' : 'var(--text-secondary)', fontWeight: 600, fontSize: '0.8125rem'
                   }}>
                   {i + 1}
                 </button>

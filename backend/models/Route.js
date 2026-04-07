@@ -84,7 +84,8 @@ const routeSchema = new mongoose.Schema({
   timestamps: true
 });
 
+// Indexes (routeNumber already indexed via unique: true)
 routeSchema.index({ source: 1, destination: 1 });
-routeSchema.index({ routeNumber: 1 });
+routeSchema.index({ isActive: 1 });
 
 module.exports = mongoose.model('Route', routeSchema);

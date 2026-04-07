@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvRoute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Station A → Station B"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#0F172A" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="March 27, 2024 10:30 AM"
+                android:textSize="12sp"
+                android:textColor="#64748B"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvFare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹25"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#10B981" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

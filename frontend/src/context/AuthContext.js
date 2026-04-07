@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import api from '../utils/api';
 
 const AuthContext = createContext();
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -18,18 +19,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      fetchUser();
-    } else {
-      setLoading(false);
-    }
-  }, [token]);
-
   const fetchUser = async () => {
     try {
-      const res = await axios.get(`${API_URL}/auth/me`);
+      const res = await api.get('/auth/me');
       setUser(res.data.user);
     } catch (error) {
       console.error('Auth error:', error);
@@ -38,6 +30,15 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      fetchUser();
+    } else {
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const login = async (email, password) => {
     const res = await axios.post(`${API_URL}/auth/login`, { email, password });
@@ -59,7 +60,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setToken(null);
     setUser(null);
-    delete axios.defaults.headers.common['Authorization'];
   };
 
   const updateUser = (userData) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -92,6 +92,13 @@ export const paymentAPI = {
   refund: (id, data) => api.put(`/payments/${id}/refund`, data),
   createRazorpayOrder: (data) => api.post('/payments/razorpay/order', data),
   verifyRazorpayPayment: (data) => api.post('/payments/razorpay/verify', data),
+};
+
+export const kycAPI = {
+  getStatus: () => api.get('/kyc/status'),
+  sendAadhaarOtp: (aadhaarNumber) => api.post('/kyc/aadhaar/send-otp', { aadhaarNumber }),
+  verifyAadhaarOtp: (otp) => api.post('/kyc/aadhaar/verify-otp', { otp }),
+  verifyPan: (panNumber) => api.post('/kyc/pan/verify', { panNumber }),
 };
 
 export const verificationAPI = {

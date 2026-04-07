@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, phone, role } = req.body;
+    const { name, email, password, phone, role, aadhaarNumber, panNumber } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -15,13 +15,37 @@ exports.register = async (req, res) => {
       });
     }
 
-    const user = await User.create({
+    // Build user data
+    const userData = {
       name,
       email,
       password,
       phone,
       role: role === 'admin' ? 'admin' : 'user',
-    });
+    };
+
+    // Store masked Aadhaar if provided
+    if (aadhaarNumber) {
+      const clean = aadhaarNumber.replace(/\s/g, '');
+      if (/^\d{12}$/.test(clean) && clean[0] !== '0' && clean[0] !== '1') {
+        userData.aadhaarNumber = `XXXX-XXXX-${clean.slice(-4)}`;
+      }
+    }
+
+    // Store masked PAN if provided
+    if (panNumber) {
+      const pan = panNumber.toUpperCase().trim();
+      if (/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan)) {
+        userData.panNumber = `${pan.slice(0, 2)}XXXXX${pan.slice(-2)}`;
+      }
+    }
+
+    // Set initial KYC status
+    if (userData.aadhaarNumber || userData.panNumber) {
+      userData.kycStatus = 'partial';
+    }
+
+    const user = await User.create(userData);
 
     const token = user.getSignedJwtToken();
 
@@ -35,7 +59,8 @@ exports.register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role
+        role: user.role,
+        kycStatus: user.kycStatus || 'none'
       }
     });
   } catch (error) {
@@ -105,7 +130,8 @@ exports.login = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        role: user.role
+        role: user.role,
+        kycStatus: user.kycStatus || 'none'
       }
     });
   } catch (error) {

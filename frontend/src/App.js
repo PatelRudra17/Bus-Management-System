@@ -6,6 +6,7 @@ import { AuthProvider } from './context/AuthContext';
 import { SocketProvider } from './context/SocketContext';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -25,6 +26,21 @@ import AdminReports from './pages/AdminReports';
 import QRVerification from './pages/QRVerification';
 import AnalyticsDashboard from './pages/AnalyticsDashboard';
 import VerificationHistory from './pages/VerificationHistory';
+import ApplySmartCard from './pages/ApplySmartCard';
+import MySmartCard from './pages/MySmartCard';
+import ReportIncident from './pages/ReportIncident';
+import AdminSmartCards from './pages/AdminSmartCards';
+import KYCVerification from './pages/KYCVerification';
+
+const MainLayout = ({ children }) => (
+  <>
+    <Sidebar />
+    <Navbar />
+    <main className="main-content">
+      {children}
+    </main>
+  </>
+);
 
 function App() {
   return (
@@ -35,28 +51,42 @@ function App() {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              
-              <Route path="/" element={<><Navbar /><PrivateRoute><Dashboard /></PrivateRoute></>} />
-              <Route path="/user-dashboard" element={<><Navbar /><PrivateRoute><UserDashboard /></PrivateRoute></>} />
-              <Route path="/apply-pass" element={<><Navbar /><PrivateRoute><ApplyPass /></PrivateRoute></>} />
-              <Route path="/book-ticket" element={<><Navbar /><PrivateRoute><BookTicket /></PrivateRoute></>} />
-              <Route path="/my-applications" element={<><Navbar /><PrivateRoute><MyApplications /></PrivateRoute></>} />
-              <Route path="/my-passes" element={<><Navbar /><PrivateRoute><MyPasses /></PrivateRoute></>} />
-              <Route path="/profile" element={<><Navbar /><PrivateRoute><Profile /></PrivateRoute></>} />
-              <Route path="/notifications" element={<><Navbar /><PrivateRoute><Notifications /></PrivateRoute></>} />
-              
-              <Route path="/admin/users" element={<><Navbar /><PrivateRoute roles={['admin']}><AdminUsers /></PrivateRoute></>} />
-              <Route path="/admin/applications" element={<><Navbar /><PrivateRoute roles={['admin']}><AdminApplications /></PrivateRoute></>} />
-              <Route path="/admin/routes" element={<><Navbar /><PrivateRoute roles={['admin']}><AdminRoutes /></PrivateRoute></>} />
-              <Route path="/admin/payments" element={<><Navbar /><PrivateRoute roles={['admin']}><AdminPayments /></PrivateRoute></>} />
-              <Route path="/admin/reports" element={<><Navbar /><PrivateRoute roles={['admin']}><AdminReports /></PrivateRoute></>} />
-              <Route path="/admin/analytics" element={<><Navbar /><PrivateRoute roles={['admin']}><AnalyticsDashboard /></PrivateRoute></>} />
-              <Route path="/verify-pass" element={<><Navbar /><PrivateRoute roles={['admin']}><QRVerification /></PrivateRoute></>} />
-              <Route path="/verification-history" element={<><Navbar /><PrivateRoute roles={['admin']}><VerificationHistory /></PrivateRoute></>} />
-              
+
+              <Route path="/" element={<MainLayout><PrivateRoute><Dashboard /></PrivateRoute></MainLayout>} />
+              <Route path="/user-dashboard" element={<MainLayout><PrivateRoute><UserDashboard /></PrivateRoute></MainLayout>} />
+              <Route path="/apply-pass" element={<MainLayout><PrivateRoute><ApplyPass /></PrivateRoute></MainLayout>} />
+              <Route path="/book-ticket" element={<MainLayout><PrivateRoute><BookTicket /></PrivateRoute></MainLayout>} />
+              <Route path="/my-applications" element={<MainLayout><PrivateRoute><MyApplications /></PrivateRoute></MainLayout>} />
+              <Route path="/my-passes" element={<MainLayout><PrivateRoute><MyPasses /></PrivateRoute></MainLayout>} />
+              <Route path="/profile" element={<MainLayout><PrivateRoute><Profile /></PrivateRoute></MainLayout>} />
+              <Route path="/notifications" element={<MainLayout><PrivateRoute><Notifications /></PrivateRoute></MainLayout>} />
+
+              <Route path="/apply-smart-card" element={<MainLayout><PrivateRoute><ApplySmartCard /></PrivateRoute></MainLayout>} />
+              <Route path="/my-card" element={<MainLayout><PrivateRoute><MySmartCard /></PrivateRoute></MainLayout>} />
+              <Route path="/report-incident" element={<MainLayout><PrivateRoute><ReportIncident /></PrivateRoute></MainLayout>} />
+              <Route path="/kyc-verification" element={<MainLayout><PrivateRoute roles={['user']}><KYCVerification /></PrivateRoute></MainLayout>} />
+
+              <Route path="/admin/users" element={<MainLayout><PrivateRoute roles={['admin']}><AdminUsers /></PrivateRoute></MainLayout>} />
+              <Route path="/admin/applications" element={<MainLayout><PrivateRoute roles={['admin']}><AdminApplications /></PrivateRoute></MainLayout>} />
+              <Route path="/admin/routes" element={<MainLayout><PrivateRoute roles={['admin']}><AdminRoutes /></PrivateRoute></MainLayout>} />
+              <Route path="/admin/payments" element={<MainLayout><PrivateRoute roles={['admin']}><AdminPayments /></PrivateRoute></MainLayout>} />
+              <Route path="/admin/reports" element={<MainLayout><PrivateRoute roles={['admin']}><AdminReports /></PrivateRoute></MainLayout>} />
+              <Route path="/admin/analytics" element={<MainLayout><PrivateRoute roles={['admin']}><AnalyticsDashboard /></PrivateRoute></MainLayout>} />
+              <Route path="/admin/smart-cards" element={<MainLayout><PrivateRoute roles={['admin']}><AdminSmartCards /></PrivateRoute></MainLayout>} />
+              <Route path="/verify-pass" element={<MainLayout><PrivateRoute roles={['admin']}><QRVerification /></PrivateRoute></MainLayout>} />
+              <Route path="/verification-history" element={<MainLayout><PrivateRoute roles={['admin']}><VerificationHistory /></PrivateRoute></MainLayout>} />
+
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-            <ToastContainer position="top-right" autoClose={3000} />
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              pauseOnHover
+              theme="light"
+            />
           </div>
         </Router>
       </SocketProvider>

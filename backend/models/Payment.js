@@ -70,7 +70,9 @@ paymentSchema.pre('save', function(next) {
   next();
 });
 
+// Indexes (transactionId already indexed via unique: true)
 paymentSchema.index({ userId: 1, paymentStatus: 1 });
-paymentSchema.index({ transactionId: 1 });
+paymentSchema.index({ createdAt: -1 });
+paymentSchema.index({ applicationId: 1 });
 
 module.exports = mongoose.model('Payment', paymentSchema);

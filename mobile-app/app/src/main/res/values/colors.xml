@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Palette -->
+    <color name="primary">#0c4a6e</color>
+    <color name="primary_dark">#083344</color>
+    <color name="primary_light">#0e7490</color>
+    <color name="primary_50">#ecfeff</color>
+    <color name="primary_100">#cffafe</color>
+    <color name="primary_200">#a5f3fc</color>
+
+    <!-- Accent -->
+    <color name="accent">#06b6d4</color>
+    <color name="accent_dark">#0891b2</color>
+    <color name="accent_light">#22d3ee</color>
+
+    <!-- Background -->
+    <color name="background">#f1f5f9</color>
+    <color name="background_light">#f8fafc</color>
+    <color name="surface">#ffffff</color>
+    <color name="card_background">#ffffff</color>
+    <color name="elevated">#ffffff</color>
+
+    <!-- Text -->
+    <color name="text_primary">#0f172a</color>
+    <color name="text_secondary">#334155</color>
+    <color name="text_tertiary">#64748b</color>
+    <color name="text_muted">#94a3b8</color>
+    <color name="text_inverse">#ffffff</color>
+
+    <!-- Semantic -->
+    <color name="success">#059669</color>
+    <color name="success_light">#10b981</color>
+    <color name="success_50">#ecfdf5</color>
+    <color name="success_100">#d1fae5</color>
+
+    <color name="error">#dc2626</color>
+    <color name="error_light">#ef4444</color>
+    <color name="error_50">#fef2f2</color>
+    <color name="error_100">#fee2e2</color>
+
+    <color name="warning">#d97706</color>
+    <color name="warning_light">#f59e0b</color>
+    <color name="warning_50">#fffbeb</color>
+    <color name="warning_100">#fef3c7</color>
+
+    <color name="info">#2563eb</color>
+    <color name="info_light">#3b82f6</color>
+    <color name="info_50">#eff6ff</color>
+    <color name="info_100">#dbeafe</color>
+
+    <!-- Border -->
+    <color name="border">#e2e8f0</color>
+    <color name="border_light">#f1f5f9</color>
+    <color name="border_dark">#cbd5e1</color>
+
+    <!-- Common -->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#9ca3af</color>
+    <color name="divider">#f1f5f9</color>
+    <color name="ripple">#1A0c4a6e</color>
+    <color name="overlay">#80000000</color>
+    <color name="scrim">#33000000</color>
+
+    <!-- Dashboard Card Icon Backgrounds -->
+    <color name="icon_bg_pass">#0c4a6e</color>
+    <color name="icon_bg_ticket">#d97706</color>
+    <color name="icon_bg_apps">#2563eb</color>
+    <color name="icon_bg_mypasses">#059669</color>
+    <color name="icon_bg_smartcard">#7c3aed</color>
+    <color name="icon_bg_report">#dc2626</color>
+    <color name="icon_bg_profile">#64748b</color>
+
+    <!-- Launcher -->
+    <color name="ic_launcher_background">#0c4a6e</color>
+</resources>

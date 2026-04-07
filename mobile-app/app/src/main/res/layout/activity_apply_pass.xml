@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F4F8"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:elevation="4dp"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Apply for Bus Pass"
+            app:titleTextColor="@android:color/white"/>
+
+        <!-- Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚌"
+                        android:textSize="48sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Apply for City Bus Pass"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Unlimited Travel Across City"
+                        android:textColor="#B3E5FC"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Form Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Location Section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📍 Location Details"
+                        android:textColor="#1E293B"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/primary"/>
+
+                    <!-- State -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="State"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerState"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/spinner_modern_bg"
+                        android:padding="16dp"
+                        android:spinnerMode="dropdown"/>
+
+                    <!-- City -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/spinner_modern_bg"
+                        android:padding="16dp"
+                        android:spinnerMode="dropdown"/>
+
+                    <!-- Info Banner -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/info_banner_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✓"
+                            android:textColor="#0C4A6E"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="City-Wide Pass - Travel unlimited on all routes"
+                            android:textColor="#0C4A6E"
+                            android:textSize="13sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                    <!-- Pass Details Section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎫 Pass Details"
+                        android:textColor="#1E293B"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/primary"/>
+
+                    <!-- Pass Type -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pass Type"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerPassType"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/spinner_modern_bg"
+                        android:padding="16dp"
+                        android:spinnerMode="dropdown"/>
+
+                    <!-- Duration -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Duration"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerDuration"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/spinner_modern_bg"
+                        android:padding="16dp"
+                        android:spinnerMode="dropdown"/>
+
+                    <!-- Start Date -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start Date"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/editStartDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/spinner_modern_bg"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_calendar"
+                        android:drawablePadding="12dp"
+                        android:focusable="false"
+                        android:hint="Select start date"
+                        android:padding="16dp"
+                        android:textColor="#1E293B"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Documents Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📎 Upload Documents"
+                        android:textColor="#1E293B"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/primary"/>
+
+                    <!-- ID Proof -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID Proof"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/btnUploadIdProof"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/button_outline_bg"
+                        android:drawableLeft="@drawable/ic_upload"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical|start"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Upload ID Proof - Aadhar, Voter ID, PAN Card"
+                        android:textColor="#64748B"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"/>
+
+                    <TextView
+                        android:id="@+id/tvIdProofStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:visibility="gone"/>
+
+                    <!-- Photo -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Passport Photo"
+                        android:textColor="#475569"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/btnUploadPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/button_outline_bg"
+                        android:drawableLeft="@drawable/ic_upload"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical|start"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Upload Passport Photo - Recent passport size"
+                        android:textColor="#64748B"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"/>
+
+                    <TextView
+                        android:id="@+id/tvPhotoStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Price Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#ECFDF5"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="💰 Total Amount"
+                            android:textColor="#065F46"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tvPassDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="General • 1 Month"
+                            android:textColor="#10B981"
+                            android:textSize="13sp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTotalAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹500"
+                        android:textColor="#16A34A"
+                        android:textSize="32sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/btnSubmitApplication"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_primary_bg"
+                android:text="SUBMIT APPLICATION"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

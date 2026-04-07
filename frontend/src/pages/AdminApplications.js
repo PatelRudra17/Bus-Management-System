@@ -14,6 +14,7 @@ const AdminApplications = () => {
 
   useEffect(() => {
     fetchApplications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination.page, filter.status]);
 
   const fetchApplications = async (page = 1) => {
@@ -253,7 +254,7 @@ const AdminApplications = () => {
       )}
 
       {selectedApp && (
-        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
+        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(4px)' }}>
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
@@ -266,7 +267,7 @@ const AdminApplications = () => {
               <div className="modal-body">
                 <div className="row g-4">
                   <div className="col-md-6">
-                    <div className="p-3 rounded" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="p-3 rounded" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '8px' }}>
                       <h6 className="text-muted mb-3">Application Info</h6>
                       <p className="mb-2"><strong>ID:</strong> {selectedApp.applicationId}</p>
                       <p className="mb-2"><strong>Pass:</strong> {selectedApp.passNumber || 'Pending'}</p>
@@ -275,7 +276,7 @@ const AdminApplications = () => {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="p-3 rounded" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="p-3 rounded" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '8px' }}>
                       <h6 className="text-muted mb-3">User Info</h6>
                       <p className="mb-2"><strong>Name:</strong> {selectedApp.userId?.name}</p>
                       <p className="mb-2"><strong>Email:</strong> {selectedApp.userId?.email}</p>
@@ -286,21 +287,21 @@ const AdminApplications = () => {
 
                 <div className="row g-3 mt-2">
                   <div className="col-md-4">
-                    <div className="p-3 rounded" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="p-3 rounded" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '8px' }}>
                       <small className="text-muted">Route</small>
                       <p className="mb-0 fw-bold">{selectedApp.routeId?.routeNumber}</p>
                       <small className="text-muted">{selectedApp.routeId?.source} → {selectedApp.routeId?.destination}</small>
                     </div>
                   </div>
                   <div className="col-md-4">
-                    <div className="p-3 rounded" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="p-3 rounded" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '8px' }}>
                       <small className="text-muted">Type</small>
                       <p className="mb-0 fw-bold">{selectedApp.passType}</p>
                       <small className="text-muted">{selectedApp.duration}</small>
                     </div>
                   </div>
                   <div className="col-md-4">
-                    <div className="p-3 rounded" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="p-3 rounded" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '8px' }}>
                       <small className="text-muted">Applied</small>
                       <p className="mb-0 fw-bold">{new Date(selectedApp.createdAt).toLocaleDateString()}</p>
                     </div>
@@ -325,9 +326,9 @@ const AdminApplications = () => {
                       {selectedApp.documents.photo && (
                         <div className="col-md-6">
                           <p className="mb-2 fw-semibold">Photo</p>
-                          <img 
-                            src={selectedApp.documents.photo} 
-                            alt="Photo" 
+                          <img
+                            src={selectedApp.documents.photo}
+                            alt="User"
                             style={{ maxWidth: '150px', borderRadius: '12px' }}
                           />
                         </div>

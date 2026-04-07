@@ -59,11 +59,41 @@ const userSchema = new mongoose.Schema({
       default: Date.now
     }
   }],
+  // KYC Fields
+  aadhaarNumber: {
+    type: String,
+    trim: true
+  },
+  aadhaarVerified: {
+    type: Boolean,
+    default: false
+  },
+  panNumber: {
+    type: String,
+    uppercase: true,
+    trim: true
+  },
+  panVerified: {
+    type: Boolean,
+    default: false
+  },
+  kycStatus: {
+    type: String,
+    enum: ['none', 'partial', 'verified'],
+    default: 'none'
+  },
+  kycOtp: String,
+  kycOtpExpire: Date,
   resetPasswordToken: String,
   resetPasswordExpire: Date
 }, {
   timestamps: true
 });
+
+// Indexes for performance (email already indexed via unique: true)
+userSchema.index({ role: 1 });
+userSchema.index({ isActive: 1 });
+userSchema.index({ role: 1, isActive: 1 }); // Compound index for combined queries
 
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
@@ -76,9 +106,12 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
 };
 
 userSchema.methods.getSignedJwtToken = function() {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is not defined');
+  }
   return require('jsonwebtoken').sign(
     { id: this._id, role: this.role },
-    process.env.JWT_SECRET || 'defaultsecret',
+    process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRE || '7d' }
   );
 };

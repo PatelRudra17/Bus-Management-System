@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { adminAPI } from '../utils/api';
 import { toast } from 'react-toastify';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { BarChart3, Download, FileText } from 'lucide-react';
+import { BarChart3 } from 'lucide-react';
 
 const AdminReports = () => {
   const [report, setReport] = useState(null);
@@ -12,6 +11,7 @@ const AdminReports = () => {
 
   useEffect(() => {
     fetchReport();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reportType, year]);
 
   const fetchReport = async () => {
@@ -23,15 +23,6 @@ const AdminReports = () => {
       toast.error('Error fetching report');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'approved': return '#38a169';
-      case 'pending': return '#d69e2e';
-      case 'rejected': return '#e53e3e';
-      default: return '#718096';
     }
   };
 

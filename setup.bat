@@ -46,7 +46,7 @@ echo Terminal 2 - Start Frontend:
 echo   cd frontend
 echo   npm start
 echo.
-echo Open browser: http://localhost:3000
+echo Open browser: http://localhost:3001
 echo.
 echo Admin Login:
 echo   Email: admin@buspass.com

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/routeCardRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_route_card"
+    android:padding="14dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Top Row: Icon + Route + Fare -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Bus Icon -->
+        <FrameLayout
+            android:id="@+id/busIconContainer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="2dp">
+            <View
+                android:id="@+id/busIconBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_card_icon"/>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_back"
+                android:rotation="180"
+                android:tint="@color/white"
+                android:contentDescription="Bus"/>
+        </FrameLayout>
+
+        <!-- Route Info (takes remaining space) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="10dp">
+
+            <!-- Source -->
+            <TextView
+                android:id="@+id/tvRouteSource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Source"
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <!-- Arrow -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="↓"
+                android:textSize="10sp"
+                android:textColor="@color/text_muted"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"/>
+
+            <!-- Destination -->
+            <TextView
+                android:id="@+id/tvRouteDestination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Destination"
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <!-- Fare + Bus Type (fixed right side) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end|center_vertical"
+            android:layout_gravity="center_vertical"
+            android:minWidth="60dp">
+
+            <TextView
+                android:id="@+id/tvRouteFare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹30"
+                android:textSize="18sp"
+                android:textColor="@color/success"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/tvBusType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STANDARD"
+                android:textSize="9sp"
+                android:textColor="@color/primary"
+                android:background="@drawable/badge_bg"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:fontFamily="sans-serif-medium"
+                android:textAllCaps="true"
+                android:letterSpacing="0.02"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="end"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Route details row: Number · Distance · Duration -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="52dp">
+
+        <TextView
+            android:id="@+id/tvRouteNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RT-001"
+            android:textSize="11sp"
+            android:textColor="@color/text_muted"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  ·  "
+            android:textSize="11sp"
+            android:textColor="@color/text_muted"/>
+
+        <TextView
+            android:id="@+id/tvRouteDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 km"
+            android:textSize="11sp"
+            android:textColor="@color/text_muted"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  ·  "
+            android:textSize="11sp"
+            android:textColor="@color/text_muted"/>
+
+        <TextView
+            android:id="@+id/tvRouteDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="~60 min"
+            android:textSize="11sp"
+            android:textColor="@color/text_muted"/>
+    </LinearLayout>
+
+    <!-- Stops (shown when selected) -->
+    <TextView
+        android:id="@+id/tvRouteStops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Stops: ..."
+        android:textSize="11sp"
+        android:textColor="@color/text_tertiary"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="52dp"
+        android:paddingTop="8dp"/>
+
+</LinearLayout>

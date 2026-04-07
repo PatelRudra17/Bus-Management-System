@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/border"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:id="@+id/cardHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_welcome_header"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPassNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PASS-001"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:id="@+id/tvPassTypeInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GENERAL - 1MONTH"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="11sp"
+                    android:layout_marginTop="2dp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.03"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/bg_badge_white"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"/>
+        </LinearLayout>
+
+        <!-- Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Route"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.04"/>
+
+                <TextView
+                    android:id="@+id/tvRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Source → Destination"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="14dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Valid From"
+                            android:textColor="@color/text_muted"
+                            android:textSize="10sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.04"/>
+
+                        <TextView
+                            android:id="@+id/tvStartDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="01/01/2024"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Valid Till"
+                            android:textColor="@color/text_muted"
+                            android:textSize="10sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.04"/>
+
+                        <TextView
+                            android:id="@+id/tvEndDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="31/01/2024"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹500"
+                    android:textColor="@color/success"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivQrCode"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:scaleType="fitCenter"
+                android:background="@drawable/bg_info_subtle"
+                android:padding="4dp"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border"/>
+
+        <!-- Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <Button
+                android:id="@+id/btnDownload"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Download"
+                android:textSize="13sp"
+                android:layout_marginEnd="6dp"/>
+
+            <Button
+                android:id="@+id/btnRenew"
+                style="@style/ButtonStyle.Outline"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Renew"
+                android:textSize="13sp"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

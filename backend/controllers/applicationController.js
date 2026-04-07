@@ -6,7 +6,7 @@ const QRCode = require('qrcode');
 const PDFDocument = require('pdfkit');
 const logger = require('../utils/logger');
 const { sendApplicationStatusEmail } = require('../utils/emailService');
-const { emitToUser, emitToAdmins } = require('../server');
+const { emitToUser, emitToAdmins } = require('../utils/socket');
 
 const calculateFare = (baseFare, passType, duration) => {
   const discountMap = {

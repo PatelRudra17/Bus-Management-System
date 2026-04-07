@@ -10,7 +10,10 @@ const AdminUsers = () => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState({ role: '', isActive: '' });
 
-  useEffect(() => { fetchUsers(); }, [filter]);
+  useEffect(() => {
+    fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
 
   const fetchUsers = async (page = 1) => {
     setLoading(true);
@@ -30,7 +33,7 @@ const AdminUsers = () => {
     } catch { toast.error('Error updating user'); }
   };
 
-  const glassCard = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16 };
+  const glassCard = { background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: 12 };
 
   return (
     <div className="container-fluid">
@@ -98,7 +101,7 @@ const AdminUsers = () => {
               </thead>
               <tbody>
                 {users.length === 0 ? (
-                  <tr><td colSpan={6} className="text-center py-4" style={{ color: 'var(--text3)' }}>No users found</td></tr>
+                  <tr><td colSpan={6} className="text-center py-4" style={{ color: 'var(--text-tertiary)' }}>No users found</td></tr>
                 ) : users.map(u => (
                   <tr key={u._id}>
                     <td>
@@ -114,19 +117,15 @@ const AdminUsers = () => {
                           {u.name?.charAt(0)?.toUpperCase()}
                         </div>
                         <div>
-                          <div style={{ fontWeight: 600, color: 'var(--text)' }}>{u.name}</div>
-                          <div style={{ fontSize: '0.78rem', color: 'var(--text3)' }}>{u.email}</div>
+                          <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{u.name}</div>
+                          <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>{u.email}</div>
                         </div>
                       </div>
                     </td>
-                    <td style={{ color: 'var(--text2)' }}>{u.phone}</td>
+                    <td style={{ color: 'var(--text-secondary)' }}>{u.phone}</td>
                     <td>
-                      <span className="badge" style={{
-                        background: u.role === 'admin' ? 'rgba(124,58,237,0.2)' : 'rgba(99,102,241,0.2)',
-                        color: u.role === 'admin' ? '#c4b5fd' : '#a5b4fc',
-                        border: `1px solid ${u.role === 'admin' ? 'rgba(124,58,237,0.4)' : 'rgba(99,102,241,0.4)'}`,
-                        display: 'inline-flex', alignItems: 'center', gap: 4
-                      }}>
+                      <span className={`badge ${u.role === 'admin' ? 'bg-info' : 'bg-primary'}`}
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                         {u.role === 'admin' ? <Shield size={11} /> : <User size={11} />}
                         {u.role}
                       </span>
@@ -136,7 +135,7 @@ const AdminUsers = () => {
                         {u.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </td>
-                    <td style={{ color: 'var(--text3)', fontSize: '0.85rem' }}>
+                    <td style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem' }}>
                       {new Date(u.createdAt).toLocaleDateString()}
                     </td>
                     <td>
@@ -161,8 +160,8 @@ const AdminUsers = () => {
                   onClick={() => fetchUsers(i + 1)}
                   style={{
                     width: 36, height: 36, borderRadius: 8, border: 'none', cursor: 'pointer',
-                    background: pagination.page === i + 1 ? 'var(--primary)' : 'rgba(255,255,255,0.07)',
-                    color: 'var(--text)', fontWeight: 600, fontSize: '0.85rem'
+                    background: pagination.page === i + 1 ? 'var(--primary)' : 'var(--bg-secondary)',
+                    color: pagination.page === i + 1 ? 'white' : 'var(--text-secondary)', fontWeight: 600, fontSize: '0.8125rem'
                   }}>
                   {i + 1}
                 </button>

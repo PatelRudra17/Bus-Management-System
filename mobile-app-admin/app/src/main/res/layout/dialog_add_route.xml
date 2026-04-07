@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/etRouteNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Route Number"
+        android:inputType="text"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Source"
+        android:inputType="text"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etDestination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Destination"
+        android:inputType="text"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:hint="Distance (km)"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/etFare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:hint="Fare (Rs)"
+            android:inputType="number"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Bus Type"
+        android:textColor="@color/text_tertiary"
+        android:textSize="12sp" />
+
+    <Spinner
+        android:id="@+id/spinnerBusType"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:drawable/btn_dropdown" />
+
+    <EditText
+        android:id="@+id/etTotalSeats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Total Seats"
+        android:inputType="number"
+        android:textSize="14sp" />
+
+</LinearLayout>

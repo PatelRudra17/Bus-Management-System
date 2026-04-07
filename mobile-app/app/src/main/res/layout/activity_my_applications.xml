@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8FAFC">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="My Applications"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#0F172A" />
+
+            <Button
+                android:id="@+id/btnApplyNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply New"
+                android:textSize="12sp"
+                android:backgroundTint="@color/primary"
+                android:textColor="@android:color/white"
+                style="@style/Widget.MaterialComponents.Button" />
+        </LinearLayout>
+
+        <!-- Filter Buttons -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="All (0)"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="80dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <Button
+                    android:id="@+id/btnPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Pending (0)"
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="@color/primary"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="80dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <Button
+                    android:id="@+id/btnApproved"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Approved (0)"
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="@color/primary"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="80dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <Button
+                    android:id="@+id/btnRejected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Rejected (0)"
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="@color/primary"
+                    android:minWidth="80dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <!-- Content Area -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Loading -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- Empty State -->
+        <TextView
+            android:id="@+id/tvEmptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="No applications found"
+            android:textSize="16sp"
+            android:textColor="#64748B"
+            android:visibility="gone" />
+
+        <!-- Applications List -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/applicationsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp" />
+        </ScrollView>
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,6 +1,9 @@
-# Bus Pass Management System
+# Bus Pass Management System with Smart Card
 
-A comprehensive full-stack Bus Pass Management System built with the MERN Stack (MongoDB, Express.js, React, Node.js).
+A comprehensive full-stack Bus Pass Management System with Smart Card functionality built with the MERN Stack (MongoDB, Express.js, React, Node.js).
+
+## 🆕 NEW: Smart Card System
+Enhanced with **Aadhaar + PAN verified smart cards** for tap-and-travel, safety features, and incident management. [Read full guide](SMART_CARD_GUIDE.md)
 
 ## Features
 
@@ -14,6 +17,26 @@ A comprehensive full-stack Bus Pass Management System built with the MERN Stack 
 - View pass history and renewal option
 - In-app notifications
 
+### 🆕 Smart Card Features
+- **Identity Verification**: Apply for smart card with Aadhaar (12 digits) + PAN verification
+- **One Card Per Person**: Unique identity linked to Aadhaar/PAN
+- **Tap & Travel**: Contactless boarding with auto fare deduction
+- **Prepaid Balance**: Online/offline recharge with auto-recharge option
+- **Concessions**: Student (50%), Senior (50%), Disabled (75%), Women (25%) discounts
+- **Travel History**: Complete journey logs with 90-day retention
+- **Safety Features**:
+  - SOS panic button during emergencies
+  - Family tracking (see which bus family member boarded)
+  - Night travel alerts (auto SMS after 9 PM)
+  - Women-only zone tag for priority seating
+  - Emergency contacts management
+- **Incident Management**:
+  - Report incidents (harassment, theft, safety concerns)
+  - Automatic passenger identification via bus logs
+  - Aadhaar-linked identity for fast action
+  - CCTV footage linkage for evidence
+  - Investigation tracking and police integration
+
 ### Admin Features
 - Admin dashboard with analytics
 - Approve or reject pass applications with remarks
@@ -22,6 +45,16 @@ A comprehensive full-stack Bus Pass Management System built with the MERN Stack 
 - Generate reports (daily/monthly/yearly)
 - Search and filter applications
 - Export data to CSV/PDF
+
+### 🆕 Admin Smart Card Features
+- Verify Aadhaar + PAN during card application
+- Activate/block/unblock cards
+- View card statistics (total cards, active, blocked, revenue)
+- Monitor travel logs and passenger lists per bus
+- Incident investigation and assignment
+- Identify passengers involved in incidents via bus logs
+- Blacklist management for repeat offenders
+- CCTV footage coordination
 
 ### Technical Features
 - QR code generation for each pass

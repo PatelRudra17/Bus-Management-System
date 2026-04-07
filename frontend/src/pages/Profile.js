@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
-import { User, Mail, Phone, Lock, Save, Shield, Camera } from 'lucide-react';
-import { authAPI } from '../utils/api';
+import { User, Mail, Phone, Lock, Save, Shield, Camera, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { authAPI, userAPI, kycAPI } from '../utils/api';
 
 const Profile = () => {
   const { user, updateUser } = useAuth();
@@ -18,6 +19,13 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
+  const [kycStatus, setKycStatus] = useState(null);
+
+  useEffect(() => {
+    kycAPI.getStatus()
+      .then(res => setKycStatus(res.data.kyc))
+      .catch(() => {});
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +40,7 @@ const Profile = () => {
     setLoading(true);
 
     try {
-      await authAPI.updateProfile(formData);
+      await userAPI.updateProfile(formData);
       updateUser(formData);
       toast.success('Profile updated successfully! ✨');
     } catch (error) {
@@ -89,9 +97,30 @@ const Profile = () => {
             </div>
             <h2 className="mb-2">{user?.name}</h2>
             <p className="mb-2 opacity-75">{user?.email}</p>
-            <span className="badge" style={{ background: 'rgba(255,255,255,0.2)' }}>
-              {user?.role?.toUpperCase()}
-            </span>
+            <div className="d-flex align-items-center gap-2 justify-content-center flex-wrap">
+              <span className="badge" style={{ background: 'rgba(255,255,255,0.2)' }}>
+                {user?.role?.toUpperCase()}
+              </span>
+              {kycStatus && user?.role !== 'admin' && (
+                <Link to="/kyc-verification" style={{ textDecoration: 'none' }}>
+                  <span className="badge d-flex align-items-center gap-1" style={{
+                    background: kycStatus.kycStatus === 'verified'
+                      ? 'rgba(16,185,129,0.25)'
+                      : kycStatus.kycStatus === 'partial'
+                        ? 'rgba(245,158,11,0.25)'
+                        : 'rgba(255,255,255,0.15)',
+                    cursor: 'pointer'
+                  }}>
+                    {kycStatus.kycStatus === 'verified'
+                      ? <><CheckCircle size={12} /> KYC Verified</>
+                      : kycStatus.kycStatus === 'partial'
+                        ? <><AlertCircle size={12} /> KYC Partial</>
+                        : <><Shield size={12} /> KYC Pending <ArrowRight size={12} /></>
+                    }
+                  </span>
+                </Link>
+              )}
+            </div>
           </div>
 
           <div className="card animate-fade-in-up animate-delay-1 mb-4">
